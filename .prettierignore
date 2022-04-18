@@ -1,0 +1,9 @@
+.git/
+.github/
+.vscode/
+dist/
+node_modules/
+tmp/
+CHANGELOG.md
+package.json
+package-lock.json

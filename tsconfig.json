@@ -21,7 +21,15 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@stk/services/*": [
+        "./src/app/core/api/services/*",
+      ],
+      "@stk/models/*": [
+        "./src/app/core/api/models/*",
+      ],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

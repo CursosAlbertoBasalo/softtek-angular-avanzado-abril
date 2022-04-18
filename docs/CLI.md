@@ -37,7 +37,7 @@ ng g m core --module app.module.ts
 ng g c core/components/header --export true
 ng g c core/components/footer --export true
 
-# Create Api module with models and services
+# Create Api folder with models and services
 ng g s api/services/agencies
 ng g interface api/models/agency --type interface
 ng g enum api/models/agencyRange --type enum
@@ -50,6 +50,10 @@ ng g enum api/models/tripStatus --type enum
 # Create Shared module for components, directives and pipes
 ng g m shared
 ng g c shared/components/preview --export true
+ng g c shared/components/loading --export true
+ng g c shared/components/error --export true
+ng g c shared/components/empty --export true
+ng g c shared/components/refresh --export true
 
 # Create Home module for home page
 ng g m home --module app.module.ts --route 'home'

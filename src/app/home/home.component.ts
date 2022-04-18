@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Agency } from '@stk/models/agency.interface';
+import { Observable } from 'rxjs';
 import { HomeService } from './home.service';
 
 @Component({
   selector: 'stk-home',
   templateUrl: './home.component.html',
   styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
-  agencies$ = this.service.getAgencies$();
+  agencies$: Observable<Agency[]> = this.service.getAgencies$();
   trips$ = this.service.getTrips$();
+
   constructor(private service: HomeService) {}
 
   ngOnInit(): void {}

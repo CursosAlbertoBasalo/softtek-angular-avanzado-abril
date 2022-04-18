@@ -11,7 +11,7 @@ import { delay, Observable, of } from 'rxjs';
 export class HomeService {
   constructor(private agencies: AgenciesService, private trips: TripsService) {}
   getAgencies$(): Observable<Agency[]> {
-    return this.agencies.getAll$().pipe(delay(1500));
+    return this.agencies.getAll$().pipe(delay(5000));
     // return this.getEmpty$();
     // return this.getError$();
   }

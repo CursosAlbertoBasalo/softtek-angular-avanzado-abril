@@ -29,6 +29,9 @@
       "@stk/models/*": [
         "./src/app/core/api/models/*",
       ],
+      "@stk/shared/*": [
+        "./src/app/shared/*",
+      ],
     }
   },
   "angularCompilerOptions": {

@@ -6,6 +6,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { PreviewComponent } from './components/preview/preview.component';
 import { RefreshComponent } from './components/refresh/refresh.component';
+import { AgencyRangePipe } from './pipes/agency-range.pipe';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { RefreshComponent } from './components/refresh/refresh.component';
     RefreshComponent,
     PreviewComponent,
     AsyncWrapperComponent,
+    AgencyRangePipe,
   ],
   imports: [CommonModule],
   exports: [
@@ -24,6 +26,7 @@ import { RefreshComponent } from './components/refresh/refresh.component';
     RefreshComponent,
     PreviewComponent,
     AsyncWrapperComponent,
+    AgencyRangePipe,
   ],
 })
 export class SharedModule {}

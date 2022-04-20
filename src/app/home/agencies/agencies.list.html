@@ -1,5 +1,5 @@
 <ul>
   <li *ngFor="let agency of agencies">
-    {{ agency.range }} {{ agency.name }}
+    {{ agency.range | agencyRange }} {{ agency.name }}
   </li>
 </ul>

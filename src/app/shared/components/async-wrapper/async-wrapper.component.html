@@ -4,8 +4,6 @@
       <ng-container *ngIf="api.data.length>0; else empty">
         <header>There are {{api.data.length}} {{ dataName }}</header>
         <main>
-          <!-- <stk-agencies [agencies]="agencies.data"></stk-agencies> -->
-          <!-- <ng-content></ng-content> -->
           <ng-container [ngTemplateOutlet]="dataTemplate"
                         [ngTemplateOutletContext]="{ data: api.data }">
           </ng-container>
@@ -14,16 +12,51 @@
           <stk-refresh (refresh)="refresh.emit()"></stk-refresh>
         </footer>
       </ng-container>
-      <ng-template #empty>
-        <stk-empty [dataName]="dataName"></stk-empty>
-      </ng-template>
     </ng-container>
-    <ng-template #error>
-      <stk-error [dataName]="dataName"
-                 [error]="api.error || ''"></stk-error>
-    </ng-template>
   </ng-container>
-  <ng-template #loading>
-    <stk-loading [dataName]="dataName"></stk-loading>
-  </ng-template>
 </article>
+
+<ng-template #error>
+  <stk-error [dataName]="dataName"
+             [error]="error"></stk-error>
+</ng-template>
+
+<ng-template #empty>
+  <stk-empty [dataName]="dataName"></stk-empty>
+</ng-template>
+
+<ng-template #loading>
+  <stk-loading [dataName]="dataName"></stk-loading>
+</ng-template>
+
+
+
+
+
+<!-- <article>
+  <ng-container *ngIf="api$ | async as api; else loading">
+    <ng-container *ngIf="api.data; else error">
+      <ng-container *ngIf="api.data.length>0; else empty">
+        <header>There are {{api.data.length}} {{ dataName }}</header>
+        <main>
+<ng-container [ngTemplateOutlet]="dataTemplate"
+              [ngTemplateOutletContext]="{ data: api.data }">
+</ng-container>
+</main>
+<footer>
+  <stk-refresh (refresh)="refresh.emit()"></stk-refresh>
+</footer>
+</ng-container>
+<ng-template #empty>
+  <stk-empty [dataName]="dataName"></stk-empty>
+</ng-template>
+</ng-container>
+<ng-template #error>
+  <stk-error [dataName]="dataName"
+             [error]="api.error || ''"></stk-error>
+</ng-template>
+</ng-container>
+<ng-template #loading>
+  <stk-loading [dataName]="dataName"></stk-loading>
+</ng-template>
+</article> -->

@@ -24,8 +24,8 @@
   "trips": [
     {
       "id": "space-y-moon-1",
-      "operatorId": "space-y",
-      "operatorTripCode": "moon",
+      "agencyId": "space-y",
+      "agencyTripCode": "moon",
       "destination": "The Moon",
       "places": 14,
       "startDate": "2023-01-01",
@@ -39,8 +39,8 @@
     },
     {
       "id": "space-y-mars-2",
-      "operatorId": "space-y",
-      "operatorTripCode": "mars",
+      "agencyId": "space-y",
+      "agencyTripCode": "mars",
       "destination": "Mars",
       "places": 8,
       "startDate": "2024-01-01",
@@ -54,8 +54,8 @@
     },
     {
       "id": "green-origin-low-orbit-3",
-      "operatorId": "green-origin",
-      "operatorTripCode": "low-orbit",
+      "agencyId": "green-origin",
+      "agencyTripCode": "low-orbit",
       "destination": "Low Orbit",
       "places": 0,
       "startDate": "2022-04-01",
@@ -69,8 +69,8 @@
     },
     {
       "id": "green-origin-iss-4",
-      "operatorId": "green-origin",
-      "operatorTripCode": "iss",
+      "agencyId": "green-origin",
+      "agencyTripCode": "iss",
       "destination": "ISS",
       "places": 6,
       "startDate": "2022-06-01",

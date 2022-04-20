@@ -16,8 +16,8 @@ export class HomeService {
     return this.getError$();
   }
   getTrips$(): Observable<Trip[]> {
-    return this.trips.getAll$().pipe(delay(500));
-    // return this.getEmpty$();
+    // return this.trips.getAll$().pipe(delay(500));
+    return this.getEmpty$();
     // return this.getError$();
   }
 

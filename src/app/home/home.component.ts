@@ -17,15 +17,7 @@ type Api<T> = {
 })
 export class HomeComponent implements OnInit {
   agencies$: Observable<Agency[]> = this.service.getAgencies$();
-  //   .pipe(
-  //   map((data) => ({ data: data, error: undefined })),
-  //   catchError((error) => of({ data: undefined, error: error.message }))
-  // );
-  //   .subscribe({
-  //   next: (data) => console.log(data),
-  //   error: (err) => console.log(err),
-  //   complete: () => console.log(),
-  // });
+
   trips$: Observable<Api<Trip>> = this.service.getTrips$().pipe(
     map((data) => ({ data: data, error: undefined })),
     catchError((error) => of({ data: undefined, error: error.message }))

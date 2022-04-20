@@ -5,6 +5,7 @@
         <header>There are {{api.data.length}} {{ dataName }}</header>
         <main>
           <!-- <stk-agencies [agencies]="agencies.data"></stk-agencies> -->
+          <ng-content></ng-content>
         </main>
         <footer>
           <stk-refresh (refresh)="refresh.emit()"></stk-refresh>

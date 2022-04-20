@@ -1,6 +1,8 @@
 <stk-async-wrapper [apiCall$]="agencies$"
                    dataName="agencies"
                    (refresh)="loadAgencies()">
+  <h1>Hola mundo</h1>
+  <stk-agencies [agencies]="[]"></stk-agencies>
 </stk-async-wrapper>
 
 <article>

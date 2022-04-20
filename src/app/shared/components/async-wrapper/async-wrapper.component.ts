@@ -12,6 +12,7 @@ import { catchError, map, Observable, of } from 'rxjs';
 type Api = {
   data?: unknown[];
   error?: string;
+  ok?: boolean;
 };
 
 @Component({
@@ -27,8 +28,8 @@ export class AsyncWrapperComponent implements OnInit {
   api$: Observable<Api> = of({});
   @Input() set apiCall$(value$: Observable<unknown[]>) {
     this.api$ = value$.pipe(
-      map((data) => ({ data })),
-      catchError((error) => of({ error: error.message }))
+      map((data) => ({ data, ok: true })),
+      catchError((error) => of({ error: error.message, ok: false }))
     );
   }
 

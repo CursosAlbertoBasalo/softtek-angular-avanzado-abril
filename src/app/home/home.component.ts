@@ -16,10 +16,11 @@ type Api<T> = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
-  agencies$: Observable<Api<Agency>> = this.service.getAgencies$().pipe(
-    map((data) => ({ data: data, error: undefined })),
-    catchError((error) => of({ data: undefined, error: error.message }))
-  );
+  agencies$: Observable<Agency[]> = this.service.getAgencies$();
+  //   .pipe(
+  //   map((data) => ({ data: data, error: undefined })),
+  //   catchError((error) => of({ data: undefined, error: error.message }))
+  // );
   //   .subscribe({
   //   next: (data) => console.log(data),
   //   error: (err) => console.log(err),
@@ -35,10 +36,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {}
 
   loadAgencies() {
-    this.agencies$ = this.service.getAgencies$().pipe(
-      map((data) => ({ data })),
-      catchError((error) => of({ error: error.message }))
-    );
+    this.agencies$ = this.service.getAgencies$();
   }
   loadTrips() {
     this.trips$ = this.service.getTrips$().pipe(

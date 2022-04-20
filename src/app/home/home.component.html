@@ -2,37 +2,18 @@
                    dataName="agencies"
                    [dataTemplate]="agenciesTemplate"
                    (refresh)="loadAgencies()">
-</stk-async-wrapper>
-<ng-template #agenciesTemplate
-             let-context>
-  <stk-agencies [agencies]="context"></stk-agencies>
-</ng-template>
-
-
-
-
-<article>
-  <ng-container *ngIf="trips$ | async as trips; else loading">
-    <ng-container *ngIf="trips.data; else error">
-      <ng-container *ngIf="trips.data.length>0; else empty">
-        <header>There are {{trips.data.length}} trips</header>
-        <main>
-          <stk-trips [trips]="trips.data"></stk-trips>
-        </main>
-        <footer>
-          <stk-refresh (refresh)="loadTrips()"></stk-refresh>
-        </footer>
-      </ng-container>
-      <ng-template #empty>
-        <stk-empty dataName="trips"></stk-empty>
-      </ng-template>
-    </ng-container>
-    <ng-template #error>
-      <stk-error dataName="trips"
-                 [error]="trips.error || ''"></stk-error>
-    </ng-template>
-  </ng-container>
-  <ng-template #loading>
-    <stk-loading dataName="trips"></stk-loading>
+  <ng-template #agenciesTemplate
+               let-context>
+    <stk-agencies [agencies]="context"></stk-agencies>
   </ng-template>
-</article>
+</stk-async-wrapper>
+
+<stk-async-wrapper [apiCall$]="trips$"
+                   dataName="trips"
+                   [dataTemplate]="tripsTemplate"
+                   (refresh)="loadTrips()">
+  <ng-template #tripsTemplate
+               let-context>
+    <stk-trips [trips]="context"></stk-trips>
+  </ng-template>
+</stk-async-wrapper>

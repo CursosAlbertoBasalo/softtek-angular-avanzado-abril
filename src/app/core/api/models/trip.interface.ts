@@ -3,8 +3,8 @@ import { TripStatus } from './trip-status.enum';
 
 export interface Trip {
   id: string | undefined;
-  operatorId: string;
-  operatorTripCode: string | undefined;
+  agencyId: string;
+  agencyTripCode: string | undefined;
   destination: string;
   startDate: Date;
   endDate: Date;

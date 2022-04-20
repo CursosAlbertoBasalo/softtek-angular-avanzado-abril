@@ -1,24 +1,28 @@
 <article>
   <ng-container *ngIf="agencies$ | async as agencies; else loading">
-    <ng-container *ngIf="agencies.length>0; else empty">
-      <header>There are {{agencies.length}} agencies</header>
-      <main>
-        <stk-agencies [agencies]="agencies"></stk-agencies>
-      </main>
-      <footer>
-        <stk-refresh (refresh)="loadAgencies()"></stk-refresh>
-      </footer>
+    <ng-container *ngIf="agencies.data; else error">
+      <ng-container *ngIf="agencies.data.length>0; else empty">
+        <header>There are {{agencies.data.length}} agencies</header>
+        <main>
+          <stk-agencies [agencies]="agencies.data"></stk-agencies>
+        </main>
+        <footer>
+          <stk-refresh (refresh)="loadAgencies()"></stk-refresh>
+        </footer>
+      </ng-container>
+      <ng-template #empty>
+        <stk-empty dataName="agencies"></stk-empty>
+      </ng-template>
     </ng-container>
-    <ng-template #empty>
-      <stk-empty dataName="agencies"></stk-empty>
+    <ng-template #error>
+      <stk-error dataName="agencies"
+                 [error]="agencies.error || ''"></stk-error>
     </ng-template>
   </ng-container>
   <ng-template #loading>
     <stk-loading></stk-loading>
   </ng-template>
-  <ng-template #error>
-    <stk-error dataName="agencies"></stk-error>
-  </ng-template>
+
 </article>
 
 

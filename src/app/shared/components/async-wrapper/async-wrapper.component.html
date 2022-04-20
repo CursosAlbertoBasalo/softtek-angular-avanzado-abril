@@ -1,8 +1,7 @@
 <article>
   <ng-container *ngIf="api$ | async as api; else loading">
-
     <ng-container
-                  *ngTemplateOutlet=" api.ok ? ok : error ; context: { api:api, error: api.error }  ">
+                  *ngTemplateOutlet=" api.ok ? ok : error ; context: { data:api.data, error: api.error } ">
     </ng-container>
 
   </ng-container>
@@ -10,17 +9,9 @@
 
 
 <ng-template #ok
-             let-api="api">
-  <ng-container *ngIf="api.data.length>0; else empty">
-    <header>There are {{api.data.length}} {{ dataName }}</header>
-    <main>
-      <ng-container [ngTemplateOutlet]="dataTemplate"
-                    [ngTemplateOutletContext]="{ data: api.data }">
-      </ng-container>
-    </main>
-    <footer>
-      <stk-refresh (refresh)="refresh.emit()"></stk-refresh>
-    </footer>
+             let-data="data">
+  <ng-container *ngTemplateOutlet="data.length > 0 ? list : empty ; context : { list : data } ">
+
   </ng-container>
 </ng-template>
 
@@ -28,6 +19,19 @@
              let-error="error">
   <stk-error [dataName]="dataName"
              [error]="error"></stk-error>
+</ng-template>
+
+<ng-template #list
+             let-list="list">
+  <header>There are {{ list.length }} {{ dataName }}</header>
+  <main>
+    <ng-container [ngTemplateOutlet]="dataTemplate"
+                  [ngTemplateOutletContext]="{ $implicit: list }">
+    </ng-container>
+  </main>
+  <footer>
+    <stk-refresh (refresh)="refresh.emit()"></stk-refresh>
+  </footer>
 </ng-template>
 
 <ng-template #empty>

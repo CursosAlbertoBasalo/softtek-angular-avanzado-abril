@@ -4,8 +4,8 @@
                    (refresh)="loadAgencies()">
 </stk-async-wrapper>
 <ng-template #agenciesTemplate
-             let-agenciesList="data">
-  <stk-agencies [agencies]="agenciesList"></stk-agencies>
+             let-context>
+  <stk-agencies [agencies]="context"></stk-agencies>
 </ng-template>
 
 

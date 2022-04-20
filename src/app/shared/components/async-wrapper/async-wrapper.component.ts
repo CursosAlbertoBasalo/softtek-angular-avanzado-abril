@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   Output,
+  TemplateRef,
 } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 
@@ -30,6 +31,8 @@ export class AsyncWrapperComponent implements OnInit {
       catchError((error) => of({ error: error.message }))
     );
   }
+
+  @Input() dataTemplate!: TemplateRef<HTMLElement>;
 
   constructor() {}
 

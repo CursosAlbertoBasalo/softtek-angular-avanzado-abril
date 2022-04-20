@@ -5,7 +5,10 @@
         <header>There are {{api.data.length}} {{ dataName }}</header>
         <main>
           <!-- <stk-agencies [agencies]="agencies.data"></stk-agencies> -->
-          <ng-content></ng-content>
+          <!-- <ng-content></ng-content> -->
+          <ng-container [ngTemplateOutlet]="dataTemplate"
+                        [ngTemplateOutletContext]="{ data: api.data }">
+          </ng-container>
         </main>
         <footer>
           <stk-refresh (refresh)="refresh.emit()"></stk-refresh>

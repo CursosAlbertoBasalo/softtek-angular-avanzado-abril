@@ -1,9 +1,15 @@
 <stk-async-wrapper [apiCall$]="agencies$"
                    dataName="agencies"
+                   [dataTemplate]="agenciesTemplate"
                    (refresh)="loadAgencies()">
-  <h1>Hola mundo</h1>
-  <stk-agencies [agencies]="[]"></stk-agencies>
 </stk-async-wrapper>
+<ng-template #agenciesTemplate
+             let-agenciesList="data">
+  <stk-agencies [agencies]="agenciesList"></stk-agencies>
+</ng-template>
+
+
+
 
 <article>
   <ng-container *ngIf="trips$ | async as trips; else loading">

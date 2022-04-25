@@ -1,22 +1,19 @@
 <article>
   <ng-container *ngIf="api$ | async as api; else loading">
-    <ng-container
-                  *ngTemplateOutlet=" api.ok ? ok : error ; context: { data:api.data, error: api.error } ">
+    <ng-container *ngTemplateOutlet=" api.data ? data : error ; context: { api:api } ">
     </ng-container>
-
   </ng-container>
 </article>
 
 
-<ng-template #ok
-             let-data="data">
+<ng-template #data
+             let-data="api.data">
   <ng-container *ngTemplateOutlet="data.length > 0 ? list : empty ; context : { list : data } ">
-
   </ng-container>
 </ng-template>
 
 <ng-template #error
-             let-error="error">
+             let-error="api.error">
   <stk-error [dataName]="dataName"
              [error]="error"></stk-error>
 </ng-template>

@@ -12,7 +12,6 @@ import { catchError, map, Observable, of } from 'rxjs';
 type Api = {
   data?: unknown[];
   error?: string;
-  ok?: boolean;
 };
 
 @Component({

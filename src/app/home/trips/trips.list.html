@@ -1,5 +1,12 @@
-<ul>
-  <li *ngFor="let trip of trips">
-    {{ trip.destination }}
-  </li>
-</ul>
+<table>
+  <thead>
+    <th>Destination</th>
+    <th>Date</th>
+    <th>Price</th>
+  </thead>
+  <tr *ngFor="let trip of trips">
+    <td>{{ trip.destination }}</td>
+    <td>{{ trip.startDate }}</td>
+    <td>{{ trip.flightPrice | number }}</td>
+  </tr>
+</table>

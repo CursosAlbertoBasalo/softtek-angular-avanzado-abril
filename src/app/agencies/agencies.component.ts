@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Agency } from '@stk/models/agency.interface';
 
 @Component({
@@ -8,9 +9,13 @@ import { Agency } from '@stk/models/agency.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AgenciesComponent implements OnInit {
-  agencies: { data: Agency[] } = { data: [] };
+  agencies!: { data: Agency[] };
 
-  constructor() {}
+  constructor(private readonly route: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.agencies = {
+      data: this.route.snapshot.data['agencies'],
+    };
+  }
 }

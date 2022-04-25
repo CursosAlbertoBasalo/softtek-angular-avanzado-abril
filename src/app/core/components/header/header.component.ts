@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styles: [],
 })
 export class HeaderComponent implements OnInit {
+  public title = 'softtek astro bookings';
   constructor() {}
 
   ngOnInit(): void {}

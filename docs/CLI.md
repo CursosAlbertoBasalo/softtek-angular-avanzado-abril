@@ -84,4 +84,16 @@ ng g c shared/components/asyncWrapper --export true
 #======
 ng g p shared/pipes/agencyRange --export true
 
+
+################################################################################
+# 2️⃣ - Router
+################################################################################
+
+# Create module for the agencies page
+ng g m agencies --module app.module.ts --route 'agencies'
+
+# Resolver to get agencies before page load
+# Use RxJs pipes to catch errors, loading...
+ng g r agencies/agencies
+
 ```

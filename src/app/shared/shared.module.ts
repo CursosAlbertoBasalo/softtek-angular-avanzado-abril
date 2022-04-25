@@ -7,6 +7,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { PreviewComponent } from './components/preview/preview.component';
 import { RefreshComponent } from './components/refresh/refresh.component';
 import { AgencyRangePipe } from './pipes/agency-range.pipe';
+import { DeactivationDialog } from './components/deactivation/deactivation.dialog';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AgencyRangePipe } from './pipes/agency-range.pipe';
     PreviewComponent,
     AsyncWrapperComponent,
     AgencyRangePipe,
+    DeactivationDialog,
   ],
   imports: [CommonModule],
   exports: [
@@ -27,6 +29,7 @@ import { AgencyRangePipe } from './pipes/agency-range.pipe';
     PreviewComponent,
     AsyncWrapperComponent,
     AgencyRangePipe,
+    DeactivationDialog,
   ],
 })
 export class SharedModule {}

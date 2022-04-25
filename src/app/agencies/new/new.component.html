@@ -4,5 +4,8 @@
   <input>
   <label> Name</label>
   <input>
-  <label (click)="canDeactivate= true"> 🚀 Save</label>
+  <label (click)="canDeactivate$.next(true)"> 🚀 Save</label>
 </form>
+
+<!-- if isAskingForDeactivation -->
+<!-- <stk-deactivation (canBeDeActivated)=""></stk-deactivation> -->

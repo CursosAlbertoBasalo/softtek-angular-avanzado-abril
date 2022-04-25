@@ -25,6 +25,6 @@ export class NewGuard implements CanActivate, CanDeactivate<unknown> {
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return component.canDeactivate;
+    return component.canDeactivate();
   }
 }

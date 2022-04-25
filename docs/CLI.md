@@ -111,5 +111,8 @@ ng g m auth/login --module app.module --route 'login'
 
 ng g guard agencies/new/new --implements CanActivate --implements CanDeactivate
 
+ng g c shared/components/deactivation --type dialog --export true
+
+
 
 ```

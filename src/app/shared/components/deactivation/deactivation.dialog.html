@@ -1,0 +1,16 @@
+<dialog open>
+  <article>
+    <header>
+      <span>Astro Bookings</span>
+    </header>
+    <main>
+      You are leaving... Are you sure?
+    </main>
+    <footer>
+      <span role="button"
+            (click)="canBeDeActivated.next(false)">No, stay here</span>
+      <span role="button"
+            (click)="canBeDeActivated.next(true)">Yes, I`m leaving</span>
+    </footer>
+  </article>
+</dialog>

@@ -1,11 +1,16 @@
 <h2>new works!</h2>
 <form>
   <label> Id</label>
-  <input>
+  <input (change)="isDirty=true">
   <label> Name</label>
-  <input>
-  <label (click)="canDeactivate$.next(true)"> 🚀 Save</label>
+  <input (change)="isDirty=true">
+  <label (click)="isDirty=false"> 🚀 Save</label>
 </form>
 
-<!-- if isAskingForDeactivation -->
-<!-- <stk-deactivation (canBeDeActivated)=""></stk-deactivation> -->
+<ng-container *ngIf="isAskingForDeActivation$ | async">
+  <stk-deactivation (canBeDeActivated)="onCanBeDeActivated($event)"></stk-deactivation>
+</ng-container>
+
+<pre>
+  IsDirty: {{ isDirty }}
+</pre>

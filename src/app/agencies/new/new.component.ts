@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 @Component({
   selector: 'stk-new',
@@ -8,15 +8,25 @@ import { Observable, Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewComponent implements OnInit {
-  isDirty = true;
-  canDeactivate$ = new Subject<boolean>();
+  isDirty = false;
+  isAskingForDeActivation$ = new Subject<boolean>();
+  canDeDeactivated$ = new Subject<boolean>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
+  onCanBeDeActivated(canBeDeactivated: boolean) {
+    this.isAskingForDeActivation$.next(false);
+    this.canDeDeactivated$.next(canBeDeactivated);
+  }
+
   canDeactivate(): Observable<boolean> {
-    return this.canDeactivate$.asObservable();
-    // return of(true);
+    if (this.isDirty) {
+      this.isAskingForDeActivation$.next(true);
+      return this.canDeDeactivated$.asObservable();
+    } else {
+      return of(true);
+    }
   }
 }

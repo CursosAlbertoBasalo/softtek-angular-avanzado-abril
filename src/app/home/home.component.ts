@@ -4,11 +4,6 @@ import { Trip } from '@stk/models/trip.interface';
 import { Observable } from 'rxjs';
 import { HomeService } from './home.service';
 
-type Api<T> = {
-  data?: T[];
-  error?: string;
-};
-
 @Component({
   selector: 'stk-home',
   templateUrl: './home.component.html',

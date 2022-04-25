@@ -17,8 +17,8 @@
 
 ## 2. Rutas, datos y control de accesos
 
-- [ ] Una página para la gestión de agencias espaciales
-- [ ] Resolver los datos antes de entrar en la página
+- [x] Una página para la gestión de agencias espaciales
+- [x] Resolver los datos antes de entrar en la página
 - [ ] Una página para el alta de una nueva agencia
 - [ ] Proteger la entrada a la página de usuarios no autorizados
 - [ ] Redirigir a los no autenticados a la página de login

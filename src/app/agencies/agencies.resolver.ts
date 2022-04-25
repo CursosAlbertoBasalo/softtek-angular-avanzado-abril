@@ -19,7 +19,7 @@ export class AgenciesResolver implements Resolve<Agency[]> {
     //     status: AgencyStatus.Active,
     //   },
     // ]).pipe(delay(3000));
-    // return this.agencies.getAll$();
-    return this.agencies.getError$();
+    return this.agencies.getAll$();
+    // return this.agencies.getError$();
   }
 }

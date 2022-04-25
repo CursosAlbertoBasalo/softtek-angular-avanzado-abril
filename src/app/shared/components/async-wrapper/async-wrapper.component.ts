@@ -7,12 +7,8 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
+import { Api } from '@stk/models/api.type';
 import { catchError, map, Observable, of } from 'rxjs';
-
-type Api = {
-  data?: unknown[];
-  error?: string;
-};
 
 @Component({
   selector: 'stk-async-wrapper',
@@ -24,7 +20,7 @@ export class AsyncWrapperComponent implements OnInit {
   @Input() dataName = '';
   @Output() refresh = new EventEmitter<void>();
 
-  api$: Observable<Api> = of({});
+  api$: Observable<Api<unknown>> = of({});
   @Input() set apiCall$(value$: Observable<unknown[]>) {
     this.api$ = value$.pipe(
       map((data) => ({ data, ok: true })),

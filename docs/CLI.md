@@ -96,4 +96,20 @@ ng g m agencies --module app.module.ts --route 'agencies'
 # Use RxJs pipes to catch errors, loading...
 ng g r agencies/agencies
 
+
+
+# Create module for new agency page
+ng g m agencies/new --module agencies.module --route 'new'
+
+
+# Can Load guard to prevent loading data before page load
+#=========================================================
+
+ng g guard core/authenticated --implements CanLoad --implements CanActivate
+
+ng g m auth/login --module app.module --route 'login'
+
+ng g guard agencies/new/new --implements CanActivate --implements CanDeactivate
+
+
 ```

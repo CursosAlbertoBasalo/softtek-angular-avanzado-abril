@@ -91,28 +91,33 @@ ng g p shared/pipes/agencyRange --export true
 
 # Create module for the agencies page
 ng g m agencies --module app.module.ts --route 'agencies'
-
 # Resolver to get agencies before page load
-# Use RxJs pipes to catch errors, loading...
+# Use RxJs pipes to catch errors
 ng g r agencies/agencies
-
-
 
 # Create module for new agency page
 ng g m agencies/new --module agencies.module --route 'new'
 
-
 # Can Load guard to prevent loading data before page load
 #=========================================================
 
-ng g guard core/authenticated --implements CanLoad --implements CanActivate
+# Protect against unauthorized access, prevent downloading the lazy module
+# Register the guard on the router with the loadChildren function
+# Redirect user to login, but with returnUrl as a parameter
+ng g guard core/authenticated --implements CanLoad
 
+# Create a login page
+# Return to url after login
 ng g m auth/login --module app.module --route 'login'
 
+# Can Activate and Can Deactivate guards
+#=======================================
+
+# Protects against data needed (activate) or not saved (deactivate)
+# Register the guard where the component is used
 ng g guard agencies/new/new --implements CanActivate --implements CanDeactivate
-
+# Delegate responsibility to the component and a dialog
 ng g c shared/components/deactivation --type dialog --export true
-
 
 
 ```

@@ -31,4 +31,19 @@ export class ValidatorsService {
 
     return validatorFunction;
   }
+  fromTo(fromControlName: string, toControlName: string): ValidatorFn {
+    let validatorFunction: ValidatorFn;
+
+    validatorFunction = (form: AbstractControl) => {
+      let errors: ValidationErrors | null = null;
+      const fromValue = form.get(fromControlName)?.value;
+      const toValue = form.get(toControlName)?.value;
+      if (fromValue > toValue) {
+        errors = { noOrdered: true };
+      }
+      return errors;
+    };
+
+    return validatorFunction;
+  }
 }

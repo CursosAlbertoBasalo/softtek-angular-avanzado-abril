@@ -11,6 +11,12 @@ const routes: Routes = [
       agencies: AgenciesResolver,
     },
     component: AgenciesComponent,
+    children: [
+      {
+        path: ':id',
+        loadChildren: () => import('./trips/trips.module').then((m) => m.TripsModule),
+      },
+    ],
   },
   {
     path: 'new',

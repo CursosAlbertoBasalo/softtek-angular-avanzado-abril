@@ -120,4 +120,12 @@ ng g guard agencies/new/new --implements CanActivate --implements CanDeactivate
 ng g c shared/components/deactivation --type dialog --export true
 
 
+# Nested routes
+#=======================================
+
+# agencies/:agencyID -> trips
+ng g m agencies/trips --module agencies-routing.module --route ':id'
+# Move to children route at agencies-routing module
+# Add router outlet to the parent component (AgenciesComponent)
+# snapshot versus observable
 ```

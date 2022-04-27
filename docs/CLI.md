@@ -150,4 +150,10 @@ ng g c auth/register/register --type form
 
 # Custom and form validators
 ng g s shared/controls/validators
+
+# Async validator for email
+ng g interface core/api/models/user --type interface
+ng g s core/api/services/users
+ng g s auth/register/userValidators
+
 ```

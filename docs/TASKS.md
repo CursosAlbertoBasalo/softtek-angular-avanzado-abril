@@ -29,10 +29,10 @@
 
 ## 3. Formularios y validación
 
-- [ ] Formulario de registro de usuario
-- [ ] Validaciones de campos obligatorios
-- [ ] Validaciones asíncrona de email
-- [ ] Validaciones duplicada de contraseña
+- [x] Formulario de registro de usuario
+- [x] Validaciones de campos obligatorios
+- [x] Validaciones asíncrona de email
+- [x] Validaciones duplicada de contraseña
 - [ ] Usar componente email común (CVA)
 - [ ] Usar componente genérico con template (CVA)
 - [ ] Re utilización de lógica de formularios

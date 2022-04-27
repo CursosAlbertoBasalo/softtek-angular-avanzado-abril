@@ -1,0 +1,33 @@
+<form [formGroup]="form">
+  <fieldset>
+    <label>Email</label>
+    <input name="email"
+           type="email"
+           formControlName="email"
+           [attr.aria-invalid]="form.get('email')?.invalid">
+    <small *ngIf="form.get('email')?.invalid">{{ form.get('email')?.errors | json }}</small>
+
+    <label>Password</label>
+    <input name="password"
+           type="text"
+           formControlName="password"
+           [attr.aria-invalid]="form.get('password')?.invalid">
+    <small *ngIf="form.get('password')?.invalid">{{ form.get('password')?.errors | json }}</small>
+
+    <label>Repeat Password</label>
+    <input name="passwordConfirmation"
+           type="text"
+           formControlName="passwordConfirmation"
+           [attr.aria-invalid]="form.get('passwordConfirmation')?.invalid">
+    <small *ngIf="form.get('passwordConfirmation')?.invalid">{{
+      form.get('passwordConfirmation')?.errors | json }}</small>
+
+  </fieldset>
+
+  <input type="button"
+         value="Register me"
+         [disabled]="form.invalid">
+  <small *ngIf="form.invalid">{{ form?.errors | json }}</small>
+
+
+</form>

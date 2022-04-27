@@ -5,6 +5,7 @@
       <a [routerLink]="[agency.id]"> {{ agency.name }} </a>
     </li>
   </ul>
+  <router-outlet></router-outlet>
   <footer>
     <a [routerLink]="['./new']">➕ Add a new Agency</a>
   </footer>

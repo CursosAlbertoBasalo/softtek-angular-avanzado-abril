@@ -24,3 +24,4 @@
 - [x] Redirigir a los no autenticados a la página de login
 - [x] Redirigir tras el login a la página de inicio
 - [x] Proteger la salida para datos no guardados
+- [ ] Mostrar viajes anidados para una agencia

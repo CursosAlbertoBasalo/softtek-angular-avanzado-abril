@@ -136,4 +136,18 @@ ng g c core/components/infoAux --export true
 # Add an auxiliary outlet at footer
 # Use auxiliary routes at header
 # Configure auxiliary outlets at main router
+
+################################################################################
+# 3️⃣ - Forms
+################################################################################
+
+ng g m auth/register --module app.module --route 'register'
+# Reactive form with validators
+ng g c auth/register/register --type form
+
+## Validations
+#============
+
+# Custom and form validators
+ng g s shared/controls/validators
 ```

@@ -26,3 +26,13 @@
 - [x] Proteger la salida para datos no guardados
 - [x] Mostrar viajes anidados para una agencia
 - [x] Mostrar un panel auxiliar en el footer para indicar la lección actual
+
+## 3. Formularios y validación
+
+- [ ] Formulario de registro de usuario
+- [ ] Validaciones de campos obligatorios
+- [ ] Validaciones asíncrona de email
+- [ ] Validaciones duplicada de contraseña
+- [ ] Usar componente email común (CVA)
+- [ ] Usar componente genérico con template (CVA)
+- [ ] Re utilización de lógica de formularios

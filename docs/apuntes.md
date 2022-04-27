@@ -315,4 +315,397 @@ En child2 solo se proyectarán los divs que contengan los atributos ``question1`
 
 https://stackblitz.com/edit/angular-ivy-bky1zq?file=src/app/app.component.html
 
+## Angular Router
 
+Con Angular Router podremos crear:
+- Rutas a componentes contenedores
+- Rutas en las que se pasan parámetros
+- Subrutas en modulos y cargar modulos(con sus subrutas) dependiendo de la ruta mediante ``lazyloading``
+- Proteger rutas con mediante ``Guards``
+- Precargar datos de un servicio antes de cargar una ruta mediante ``Resolvers``
+
+Además de esto, disponemos de mecanismos para hacer redirecciones y crear menus de navegación.
+
+![nav-diagram](https://user-images.githubusercontent.com/5833528/165269470-67830b6a-cccb-43a5-bcaa-472ed05d98f7.png)
+
+Mas info -> https://docs.angular.lat/tutorial/toh-pt5
+            
+Mas info -> https://soka.gitlab.io/angular/conceptos/routing/proyecto-basico-routing/proyecto-basico-routing/
+
+Ejemplo simple de enrutador:
+https://stackblitz.com/edit/angular-wtpscq?file=src%2Fapp%2Fapp-routing.module.ts
+
+### LazyLoading
+
+El ``Lazy Loading`` es un método para limitar los módulos que se cargan y solo cargar los que el usuario necesita actualmente. Esto puede mejorar el rendimiento de una aplicación y reducir el tamaño del paquete inicial.
+
+Ejemplo:
+
+En una aplicación angula primero creamos un nuevo módulo:
+
+``ng generate module shop --route shop --module app.module``
+
+Ahora vamos a crear 3 componentes dentro del módulo creado:
+
+El primero será un componente cart:
+
+``ng generate component shop/cart --module shop``
+
+El segundo será un componente checkout:
+
+``ng generate component shop/checkout --mpdule shop``
+
+El tercero será un componente confirm:
+
+``ng generate component shop/confirm --module shop``
+
+Los tres componentes se ubicarán en el directorio shop.
+
+En el enrutamiento principal, añadimos una ruta ``shop`` que cargue el modulo:
+
+src/app/app-routing.module.ts
+
+```ts
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { 
+    path: 'shop', 
+    loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule) 
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
+
+A ``loadChildren`` se le pasa una función que retorna la importación dinámica del módulo solo cuando sea necesario, en este caso cuando se acceda a la ruta ``shop`` se cargará el modulo. La importación dinámica se basa en promesas y le da acceso al módulo.
+
+Lo siguiente es configurar rutas específicas para el módulo específico ``shop``:
+
+src/app/shop/shop-routing.module.ts
+
+```ts
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ConfirmComponent } from './confirm/confirm.component';
+
+const routes: Routes = [
+  { path: '', component: CartComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'confirm', component: ConfirmComponent },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class ShopRoutingModule { }
+```
+
+src/app/shop/shop.module.ts
+
+```ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { ShopRoutingModule } from './shop-routing.module';
+import { ShopComponent } from './shop.component';
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ConfirmComponent } from './confirm/confirm.component';
+
+@NgModule({
+  declarations: [
+    ShopComponent,
+    CartComponent,
+    CheckoutComponent,
+    ConfirmComponent,
+  ],
+  imports: [
+    CommonModule,
+    ShopRoutingModule
+  ]
+})
+export class ShopModule { }
+```
+
+Ahora cuando se navegue a /shop, /shop/checkout o /shop/confirm y módulo shop se cargará, no antes.
+
+https://stackblitz.com/edit/angular-lazy-loading-vha9is?file=src%2Fapp%2Fapp-routing.module.ts
+
+### Route Resolvers
+
+Angular Route Resolver se utiliza para obtener algunos datos antes de cargar una ruta. Se puede definir como un middleware para mejorar la experiencia del usuario mediante la carga de datos antes de que el usuario navegue a un componente en particular.
+
+Este ejemplo está basado para entrar a una vista del perfil de un usuario, así que de esta forma quedaría el resolver.
+
+```ts
+import { Injectable } from '@angular/core';
+import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { ProfileResponse } from '@interfaces/profile-response.interface';
+import { Observable } from 'rxjs';
+import { UsersService } from '@services/users.service';
+
+@Injectable({ providedIn: 'root' })
+export class ProfileResolver implements Resolve<ProfileResponse> {
+
+    constructor(private usersService: UsersService) { }
+
+    resolve(route: ActivatedRouteSnapshot): Observable<ProfileResponse> {
+        return this.usersService.findUser()
+    }
+}
+```
+
+Ahora, necesitamos ir al archivo de rutas de nuestra aplicación y aplicar el resolver en un componente o módulo lazy.
+
+```ts
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { ProfileResolver } from '@resolvers/profile.resolver';
+
+import { DashboardComponent } from './dashboard.component';
+
+const routes: Routes = [
+  {
+    path: '', component: DashboardComponent,
+    children: [
+      { path: '', loadChildren: () => import('../main/main.module').then(m => m.MainModule) },
+      {
+        path: 'profile',
+        resolve: {
+          profile: ProfileResolver // RESOLVER ESTA AQUÍ
+        },
+        loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule)
+      }
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class DashboardRoutingModule { }
+```
+
+Si bien, el resolver se está aplicando sobre la ruta 'profile' y en esa ruta profile se está cargando un módulo de forma lazy.
+También es posible aplicarlo sobre un componente y no en un módulo perezoso.
+
+Ahora en el componente ya no necesitamos invocar el servicio para realizar la llamada, porque el resolver realizó esta llamada antes de entrar a la página, y para recuperar los datos retornados por el servidor se puede hacer de la siguiente manera.
+
+```ts
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+
+@Component({
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
+})
+export class ProfileComponent implements OnInit {
+
+  currentUser: ProfileResponse;
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.getCurrentUser();
+  }
+
+  getCurrentUser(): void {
+    this.currentUser = this.route.snapshot.data.profile;
+  }
+}
+```
+Algunas veces si la obtención de los datos mediante el resolver tarda unos segundos se puede mostrar un ``loading..`` con texto o un grafico animado, esto se puede implementar de varias maneras:
+
+Con un loader simple en AppComponent:
+
+app.component.html
+
+```html
+<div class="loader" *ngIf="isLoader">
+  <div>Loading...</div>
+</div>
+<router-outlet></router-outlet>
+```
+
+app.component.ts
+
+```ts
+import { Component } from "@angular/core";
+import {
+  Router,
+  RouterEvent,
+  NavigationStart,
+  NavigationEnd
+} from "@angular/router";
+
+@Component({
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"]
+})
+export class AppComponent {
+  isLoader: boolean;
+
+  constructor(private _router: Router) {}
+
+  ngOnInit() {
+    this.routerEvents();
+  }
+
+  routerEvents() {
+    this._router.events.subscribe((event: RouterEvent) => {
+      switch (true) {
+        case event instanceof NavigationStart: {
+          this.isLoader = true;
+          break;
+        }
+        case event instanceof NavigationEnd: {
+          this.isLoader = false;
+          break;
+        }
+      }
+    });
+  }
+}
+```
+
+Cuando comience la navegación, el valor de ``isLoader`` será true se mostrará el loader. Después de que el resolver termine su tarea de obtención de los datos, se ocultará el loader.
+
+Otra forma sería usando un interceptor:
+
+ejemplo con interceptor -> https://www.angulartip.com/caso-de-usos/interceptores/loading
+
+más info -> https://www.pluralsight.com/guides/prefetching-data-for-an-angular-route
+
+### Guards
+
+Hay veces que queremos que determinadas áreas de nuestra aplicación web estén protegidas y solo puedan ser accedidas si el usuario ésta logueado (un panel de control por ejemplo) o incluso que solo puedan ser accedidas por determinados tipos de usuarios. 
+
+Para conseguir esto con Angular se usan los ``guards``. Los Guards en Angular, son de alguna manera: middlewares que se ejecutan antes de cargar una ruta y determinan si se puede cargar dicha ruta o no.
+
+Con su uso es posible estructurar el código de la aplicación de una manera más organizada y donde la lógica de la ruta está en la ruta en sí y la lógica de permisos y acceso a recursos se encuentra aislada.
+
+Existen 4 tipos diferentes de Guards que son los siguientes:
+
+- CanActivate : decide si se puede activar una ruta, esta protección no es la mejor para módulos lazy-loading, ya que esta protección siempre cargará el módulo en la memoria, incluso si el guard devolvió falso.
+- CanLoad : decide si un módulo de una ruta se puede cargar. Esto resulta útil para los módulos lazy-loading. Ni siquiera se cargarán si el guard devuelve falso.
+- CanActivateChild: Funciona de la misma manera que CanActivate, la única diferencia es que se utiliza para rutas hijas.
+- CanDeactivate: Es lo opuesto a CanActivate, según una condición, nos permite salir de una ruta o una página. Se puede utilizar por ejemplo, cuando tenemos un formulario y queremos preguntar si desea descartar los cambios del mismo.
+
+#### Implementación de guards
+
+Con el CLI de angular podemos generar un guard usando el comando:
+
+``ng g guard core/auth --implements CanActivate``
+
+Los guards se implementan como si fuera un servicio, con el decorador ``@Inyectable``.
+
+```ts
+import { Injectable } from '@angular/core';
+import { Router, CanActivate, ActivatedRouteSnapshot, 
+RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+
+  constructor(
+    private readonly router: Router,
+    private readonly authService: AuthService
+  ) { }
+
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+    if (this.authService.isAuthenticated()) {
+      return true;
+    }
+
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    return false;
+  }
+
+}
+```
+En el método ``canActivate()`` se hace la comprobación. Si el usuario no está logueado lo llevamos a la página de login con router.navigate y devolvemos false. Si esta logueado, devolvemos true.
+
+con ``canLoad()``
+
+```ts
+import { Injectable } from '@angular/core';
+import { Router, CanLoad, Route } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanLoad {
+
+  constructor(
+    private readonly router: Router,
+    private readonly authService: AuthService
+  ) { }
+
+  canLoad(route: Route): boolean {
+
+    if (this.authService.isAuthenticated()) {
+      return true;
+    }
+
+    this.router.navigate(['/login'], { queryParams: { returnUrl: route.path } });
+    return false;
+  }
+
+}
+```
+
+Para que funcione, tenemos que importar el guard en el app.module.ts, en la sección providers en el caso de no haber indicado el parámetro providedIn:'root'
+
+Para usar un guard en una ruta, lo importamos en el archivo de rutas y añadimos un campo a la ruta llamado canActivate con el guard que acabamos de crear:
+
+``{ path: 'dashboard', component: DashboardComponent,  canActivate: [AuthGuard] },``
+
+con CanLoad
+
+```ts
+{
+    path: 'dashboard',
+    canLoad: [AuthGuard],
+    loadChildren: () =>
+      import('./modules/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      )
+},
+```
+Si el Guard implementa varios métodos y se quieren aplicar en una misma ruta:
+
+```ts
+{
+    path: '',
+    canActivate: [NewGuard],
+    component: NewComponent,
+    canDeactivate: [NewGuard],
+},
+```
+
+mas info:
+
+https://levelup.gitconnected.com/route-guards-angular-1ea6e596ce65
+https://www.angulartip.com/caso-de-usos/guards

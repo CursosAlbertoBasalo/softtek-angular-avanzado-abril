@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { InfoAuxComponent } from './core/components/info-aux/info-aux.component';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
@@ -10,6 +11,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./auth/login/login.module').then((m) => m.LoginModule),
+  },
+  {
+    path: ':lesson',
+    outlet: 'infoAux',
+    component: InfoAuxComponent,
   },
 ];
 

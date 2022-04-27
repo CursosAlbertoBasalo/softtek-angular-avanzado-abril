@@ -128,4 +128,12 @@ ng g m agencies/trips --module agencies-routing.module --route ':id'
 # Move to children route at agencies-routing module
 # Add router outlet to the parent component (AgenciesComponent)
 # snapshot versus observable
+
+# Auxiliary routes
+#=======================================
+
+ng g c core/components/infoAux --export true
+# Add an auxiliary outlet at footer
+# Use auxiliary routes at header
+# Configure auxiliary outlets at main router
 ```

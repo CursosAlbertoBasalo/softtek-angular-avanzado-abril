@@ -3,7 +3,10 @@
     <a routerLink="/">
       🚀 {{ title | uppercase }}
     </a>
-    <a [routerLink]="['/agencies']"> ➡️ Agencies </a>
+    <a [routerLink]="[{ outlets : { primary:['login'] ,infoAux: ['forms'] }}]"> ➡️ Log In
+    </a>
+    <a [routerLink]="[{ outlets : { primary:['agencies'] ,infoAux: ['routing'] }}]"> ➡️
+      Agencies </a>
   </nav>
 </header>
 <hr>

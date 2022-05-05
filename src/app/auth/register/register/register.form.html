@@ -1,22 +1,25 @@
 <form [formGroup]="form">
   <fieldset>
-    <label>Email</label>
-    <input name="email"
-           type="email"
-           formControlName="email"
-           [attr.aria-invalid]="form.get('email')?.invalid">
-    <small *ngIf="form.get('email')?.invalid">{{ form.get('email')?.errors | json }}</small>
 
-    <label>Password</label>
+    <stk-email formControlName="email"></stk-email>
+
+    <!-- <label for="password">Password</label>
     <input name="password"
-           type="text"
+           type="password"
            formControlName="password"
            [attr.aria-invalid]="form.get('password')?.invalid">
-    <small *ngIf="form.get('password')?.invalid">{{ form.get('password')?.errors | json }}</small>
+    <small *ngIf="form.get('password')?.invalid">{{ form.get('password')?.errors | json }}</small> -->
 
-    <label>Repeat Password</label>
+    <stk-template formControlName="password"
+                  label="Password Generic"
+                  type="password"
+                  [form]="form">
+    </stk-template>
+
+
+    <label for="passwordConfirmation">Repeat Password</label>
     <input name="passwordConfirmation"
-           type="text"
+           type="password"
            formControlName="passwordConfirmation"
            [attr.aria-invalid]="form.get('passwordConfirmation')?.invalid">
     <small *ngIf="form.get('passwordConfirmation')?.invalid">{{

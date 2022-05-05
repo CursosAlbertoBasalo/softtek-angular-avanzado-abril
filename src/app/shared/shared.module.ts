@@ -9,6 +9,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { PreviewComponent } from './components/preview/preview.component';
 import { RefreshComponent } from './components/refresh/refresh.component';
 import { AgencyRangePipe } from './pipes/agency-range.pipe';
+import { EmailControl } from './controls/email/email.control';
+import { TemplateControl } from './controls/template/template.control';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { AgencyRangePipe } from './pipes/agency-range.pipe';
     AsyncWrapperComponent,
     AgencyRangePipe,
     DeactivationDialog,
+    EmailControl,
+    TemplateControl,
   ],
   imports: [CommonModule, ReactiveFormsModule],
   exports: [
@@ -32,6 +36,8 @@ import { AgencyRangePipe } from './pipes/agency-range.pipe';
     AsyncWrapperComponent,
     AgencyRangePipe,
     DeactivationDialog,
+    EmailControl,
+    TemplateControl,
   ],
 })
 export class SharedModule {}

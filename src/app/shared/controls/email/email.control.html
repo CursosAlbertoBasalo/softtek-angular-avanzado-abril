@@ -1,0 +1,11 @@
+<ng-container [formGroup]="form">
+  <label>Email</label>
+  <input name="email"
+         type="email"
+         [formControlName]="formControlName"
+         [attr.aria-invalid]="form.get('email')?.invalid"
+         (blur)="touchedCallback()">
+  <small *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+    {{ form.get('email')?.errors | json }}
+  </small>
+</ng-container>

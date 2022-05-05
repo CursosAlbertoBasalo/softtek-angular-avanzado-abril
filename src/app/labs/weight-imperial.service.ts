@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WeightAbstractService } from './weight-abstract.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class WeightImperialService extends WeightAbstractService {
   constructor() {
     super();

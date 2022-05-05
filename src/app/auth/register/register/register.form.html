@@ -3,15 +3,18 @@
 
     <stk-email formControlName="email"></stk-email>
 
-    <!-- <label for="password">Password</label>
+    <!--
+      <label for="password">Password</label>
     <input name="password"
+           id="password"
            type="password"
            formControlName="password"
            [attr.aria-invalid]="form.get('password')?.invalid">
-    <small *ngIf="form.get('password')?.invalid">{{ form.get('password')?.errors | json }}</small> -->
+    <small *ngIf="form.get('password')?.invalid">{{ form.get('password')?.errors | json }}</small>
+  -->
 
     <stk-template formControlName="password"
-                  label="Password Generic"
+                  label="Password"
                   type="password"
                   [form]="form">
     </stk-template>

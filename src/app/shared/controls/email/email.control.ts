@@ -11,6 +11,12 @@ import {
 import { UserValidatorsService } from 'src/app/auth/register/user-validators.service';
 import { ValidatorsService } from '../validators.service';
 
+// class inventada {
+//   constructor(@Inject(NG_VALUE_ACCESSOR) control: ControlValueAccessor) {
+//     control.writeValue('')
+//   }
+// }
+
 @Component({
   selector: 'stk-email',
   templateUrl: './email.control.html',

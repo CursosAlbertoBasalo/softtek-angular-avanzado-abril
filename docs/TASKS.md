@@ -42,4 +42,4 @@
 - [x] Servicio pesado para cálculos de precios
 - [x] Servicios para mostrar pesos en distintos sistemas de medidas
 - [x] Servicio de Logging
-- [ ] Provider as a resolver para un componente
+- [x] Provider as a resolver para un componente

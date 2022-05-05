@@ -18,6 +18,7 @@ const routes: Routes = [
     component: InfoAuxComponent,
   },
   { path: 'register', loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) },
+  { path: 'labs', loadChildren: () => import('./labs/labs.module').then(m => m.LabsModule) },
 ];
 
 @NgModule({

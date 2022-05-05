@@ -13,7 +13,6 @@ export class AgenciesService {
   constructor(private http: HttpClient) {}
 
   getAll$(): Observable<Agency[]> {
-    console.log('getAll$', this.apiUrl);
     return this.http.get<Agency[]>(this.apiUrl);
   }
   getError$(): Observable<Agency[]> {

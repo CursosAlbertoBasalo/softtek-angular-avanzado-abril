@@ -156,4 +156,14 @@ ng g interface core/api/models/user --type interface
 ng g s core/api/services/users
 ng g s auth/register/userValidators
 
+## Controls and sub forms with CVA
+#=================================
+
+# Create email form control with CVA
+# with a new form and auto defined validators
+ng g c shared/controls/email --type control --export true
+
+# passing validators as Input() and creating a sub form
+ng g c shared/controls/template --type control --export true
+
 ```

@@ -7,6 +7,11 @@ import { WeightAbstractService } from './weight-abstract.service';
 import { WeightImperialService } from './weight-imperial.service';
 import { WeightMetricService } from './weight-metric.service';
 
+function unitsFactory(): WeightAbstractService {
+  if (environment.units === 'imperial') return new WeightImperialService();
+  else return new WeightMetricService();
+}
+
 @NgModule({
   declarations: [LabsComponent],
   imports: [CommonModule, LabsRoutingModule],
@@ -25,10 +30,7 @@ import { WeightMetricService } from './weight-metric.service';
     // },
     {
       provide: WeightAbstractService,
-      useFactory: () => {
-        if (environment.units === 'imperial') return new WeightImperialService();
-        else return new WeightMetricService();
-      },
+      useFactory: unitsFactory,
     },
   ],
 })

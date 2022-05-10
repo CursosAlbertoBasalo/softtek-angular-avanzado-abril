@@ -197,6 +197,6 @@ ng g s core/logger
 #=====================
 
 ng g m agencies/agency --module agencies.module --route ':id'
-# agency.provider.ts
+# agency.provider.ts (manual created and named for consistency)
 
 ```

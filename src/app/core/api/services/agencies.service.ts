@@ -18,4 +18,8 @@ export class AgenciesService {
   getError$(): Observable<Agency[]> {
     return this.http.get<Agency[]>(this.apiUrl + '/error');
   }
+
+  getById$(id: string): Observable<Agency> {
+    return this.http.get<Agency>(this.apiUrl + '/' + id);
+  }
 }

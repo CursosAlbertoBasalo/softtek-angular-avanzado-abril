@@ -3,6 +3,7 @@
   <ul>
     <li *ngFor="let agency of agencies.data">
       <a [routerLink]="[agency.id]"> {{ agency.name }} </a>
+      <a [routerLink]="['view',agency.id]"> 🪟 </a>
     </li>
   </ul>
   <router-outlet></router-outlet>

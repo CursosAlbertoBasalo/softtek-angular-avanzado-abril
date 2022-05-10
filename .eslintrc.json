@@ -48,6 +48,7 @@
           {
             "suffixes": [
               "Component",
+              "Control",
               "Dialog",
               "List",
               "Form",

@@ -33,6 +33,13 @@
 - [x] Validaciones de campos obligatorios
 - [x] Validaciones asíncrona de email
 - [x] Validaciones duplicada de contraseña
-- [ ] Usar componente email común (CVA)
-- [ ] Usar componente genérico con template (CVA)
-- [ ] Re utilización de lógica de formularios
+- [x] Usar componente email común (CVA)
+- [x] Usar componente genérico como template (CVA)
+- [x] Re utilización de lógica de formularios
+
+## 4. Inyección de dependencias
+
+- [x] Servicio pesado para cálculos de precios
+- [x] Servicios para mostrar pesos en distintos sistemas de medidas
+- [x] Servicio de Logging
+- [x] Provider as a resolver para un componente

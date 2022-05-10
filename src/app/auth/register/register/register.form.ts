@@ -19,11 +19,13 @@ export class RegisterForm implements OnInit {
   form: FormGroup;
   private emailValidators = [Validators.required, Validators.email];
   private emailAsyncValidators = [this.userValidators.emailFree()];
+
   private emailOptions: FormControlOptions = {
     updateOn: 'blur',
     validators: this.emailValidators,
     asyncValidators: this.emailAsyncValidators,
   };
+
   private passwordValidators = [
     Validators.required,
     Validators.minLength(3),

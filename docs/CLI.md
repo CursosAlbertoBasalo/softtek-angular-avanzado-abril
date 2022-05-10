@@ -199,4 +199,27 @@ ng g s core/logger
 ng g m agencies/agency --module agencies.module --route ':id'
 # agency.provider.ts (manual created and named for consistency)
 
+################################################################################
+# 5️⃣ - RxJS and HTTP
+################################################################################
+
+## Interceptors
+#==============
+
+# Caching (url, response)
+ng g interceptor core/api/services/cache
+
+# Status indicator (working, success, error)
+ng g interceptor core/api/services/status
+ng g interface core/api/models/apiStatus --type interface
+ng g enum core/api/models/status --type enum
+
+# Error handler (with retry, redirect and log)
+ng g interceptor core/api/services/error
+
+## Operators
+#============
+
+# A search optimized operator
+ng g m trips --module app.module.ts --route 'trips'
 ```

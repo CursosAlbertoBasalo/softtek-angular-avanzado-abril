@@ -43,3 +43,13 @@
 - [x] Servicios para mostrar pesos en distintos sistemas de medidas
 - [x] Servicio de Logging
 - [x] Provider as a resolver para un componente
+
+## 5. RxJS y HTTP
+
+- [x] Caché de llamadas HTTP (filter, tap)
+- [x] Gestión de estado de las comunicaciones HTTP (para usar más adelante con un store)
+- [x] Control de errores de las comunicaciones HTTP (retryWhen, catchError, mergeMap)
+- [x] Obtener lista de viajes de la agencia activa (switchMap vs mergeMap)
+- [x] Obtener total de plazas ofertadas por todas las agencias (forkJoin)
+- [x] Un buscador de vuelos (fromEvent, debounceTime, distinctUntilChanged)
+- [x] Compartir resultados asíncronos (share, shareReplay)

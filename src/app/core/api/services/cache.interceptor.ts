@@ -29,3 +29,13 @@ export class CacheInterceptor implements HttpInterceptor {
     );
   }
 }
+
+// export class HttpClient {
+//   constructor(@Inject(HTTP_INTERCEPTORS) private interceptors: HttpInterceptor[]) {
+//   }
+
+//   get(tuRequest) {
+
+//     this.interceptors.forEach(i=> i.intercept(tuRequest))
+//   }
+// }

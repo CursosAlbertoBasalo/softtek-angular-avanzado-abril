@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CacheInterceptor } from '@stk/services/cache.interceptor';
 import { environment } from 'src/environments/environment';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -16,6 +17,7 @@ import { APP_VERSION, ONLY_ERRORS } from './tokens';
   providers: [
     { provide: APP_VERSION, useValue: '1.0.0' },
     { provide: ONLY_ERRORS, useValue: environment.onlyErrors },
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
   ],
 })
 export class CoreModule {

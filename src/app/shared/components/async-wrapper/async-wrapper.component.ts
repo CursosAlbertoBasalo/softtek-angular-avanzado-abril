@@ -24,6 +24,7 @@ export class AsyncWrapperComponent implements OnInit {
   @Input() set apiCall$(value$: Observable<unknown[]>) {
     this.api$ = value$.pipe(
       map((data) => ({ data, ok: true })),
+
       catchError((error) => of({ error: error.message, ok: false }))
     );
   }

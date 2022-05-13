@@ -1,6 +1,14 @@
 <h2>Search for trips</h2>
+<h2>Results: {{ (trips$ | async)?.length }}</h2>
 <form>
   <input #searchInput
          type="search">
 </form>
 <pre>{{ searchInput$ | async | json }}</pre>
+
+<pre>{{ trips$ | async | json }}</pre>
+
+<!-- <ng-container *ngIf="trips$ | async as trips">
+  <h2>Results: {{ trips.length }}</h2>
+  <pre>{{ trips | json }}</pre>
+</ng-container> -->

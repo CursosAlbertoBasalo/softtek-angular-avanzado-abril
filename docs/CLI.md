@@ -233,4 +233,31 @@ Create `src/app/core/atomic.store.ts` file with types and classes
 # Extend on a service
 ng g s core/api/services/apiStatus-store # rename to apiStatus.store and class without suffix
 
+################################################################################
+# 7️⃣ - SSR
+################################################################################
+ng update
+ng update @angular/cli
+npm i --force # commit changes
+ng update @angular/core # commit changes
+ng add @nguniversal/express-engine
+
+npm run api
+npm run dev:ssr
+
+npm run build:ssr
+npm run serve:ssr
+
+npm run prerender
+
+##  @Inject(PLATFORM_ID) private readonly platformId: Object, on Logger
+
+ng g s core/abstract
+ng g s core/client
+ng g s core/server
+
+```
+
+```
+
 ```

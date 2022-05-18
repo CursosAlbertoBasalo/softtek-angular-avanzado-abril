@@ -57,4 +57,4 @@
 ## 6. Redux
 
 - [x] Un Store reactivo para comunicar datos entre elementos desacoplados
-- [ ] Uso para el estado de las llamadas HTTP
+- [x] Uso para el estado de las llamadas HTTP

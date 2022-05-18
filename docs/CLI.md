@@ -231,6 +231,6 @@ ng g m trips --module app.module.ts --route 'trips'
 Create `src/app/core/atomic.store.ts` file with types and classes
 
 # Extend on a service
-ng g s data/services/apiStatus-store # rename to apiStatus.store and class without suffix
+ng g s core/api/services/apiStatus-store # rename to apiStatus.store and class without suffix
 
 ```

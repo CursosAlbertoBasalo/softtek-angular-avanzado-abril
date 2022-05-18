@@ -1,7 +1,10 @@
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, map, Observable, ReplaySubject } from 'rxjs';
 
 export type Action = { type: string; payload: unknown };
 export type Change<T> = { action: Action; current: T; next: T };
+
+// export type Reducer<T> = (state: T, payload: unknown) => T;
+// export type Selector<T, K> = (state: T) => K;
 
 export class AtomicStore<T> {
   private state$: BehaviorSubject<T>;
@@ -20,9 +23,9 @@ export class AtomicStore<T> {
     const payload = action.payload as Partial<T>;
     if (payload) {
       const current = this.get();
-      const next = { ...current, ...payload };
+      const next = { ...current, ...payload }; // reducing
       this.state$.next(next);
-      this.changes$.next({ action, current, next });
+      this.changes$.next({ action, current, next: this.clone(next) });
     }
   }
 
@@ -31,7 +34,7 @@ export class AtomicStore<T> {
   }
 
   get$(): Observable<T> {
-    return this.state$.asObservable();
+    return this.state$.asObservable().pipe(map((state) => this.clone(state)));
   }
 
   private clone(state: T): T {

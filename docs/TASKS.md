@@ -53,3 +53,8 @@
 - [x] Obtener total de plazas ofertadas por todas las agencias (forkJoin)
 - [x] Un buscador de vuelos (fromEvent, debounceTime, distinctUntilChanged)
 - [x] Compartir resultados asíncronos (share, shareReplay)
+
+## 6. Redux
+
+- [x] Un Store reactivo para comunicar datos entre elementos desacoplados
+- [ ] Uso para el estado de las llamadas HTTP

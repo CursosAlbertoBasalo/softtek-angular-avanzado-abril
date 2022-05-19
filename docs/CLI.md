@@ -271,4 +271,7 @@ npm i --force # commit changes
 ng update @angular/core
 npm i --force # commit changes
 ng add @angular/pwa
+
+
+ng g s core/pwa
 ```

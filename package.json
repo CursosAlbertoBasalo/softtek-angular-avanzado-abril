@@ -12,6 +12,7 @@
     "start": "ng serve -o",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "pwa": "npm run build && npx http-server -p 8084 -c-1 dist/softtek-angular-avanzado-abril/browser",
     "test": "ng test",
     "lint": "ng lint --fix",
     "api": "json-server-auth ./database/db.json -r ./database/routes.json",

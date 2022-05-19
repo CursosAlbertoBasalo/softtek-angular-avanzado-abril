@@ -5,12 +5,22 @@
     {
       "name": "app",
       "installMode": "prefetch",
+      "updateMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
           "/index.html",
           "/manifest.webmanifest",
-          "/*.css",
+          "/*.css"
+        ]
+      }
+    },
+    {
+      "name": "lazy",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
           "/*.js"
         ]
       }
@@ -24,6 +34,44 @@
           "/assets/**",
           "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "stable-cache-first",
+      "urls": [
+        "http://localhost:3000/agencies"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 10,
+        "maxAge": "1d"
+      }
+    },
+    {
+      "name": "dynamic-network-first",
+      "urls": [
+        "http://localhost:3000/bookings",
+        "http://localhost:3000/trips"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 10,
+        "maxAge": "1h",
+        "timeout": "10s"
+      }
+    },
+    {
+      "name": "stale-while-revalidated",
+      "urls": [
+        "http://localhost:3000/users"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 10,
+        "maxAge": "1m",
+        "timeout": "0u"
       }
     }
   ]

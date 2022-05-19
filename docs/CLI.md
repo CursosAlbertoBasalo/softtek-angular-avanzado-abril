@@ -242,16 +242,20 @@ npm i --force # commit changes
 ng update @angular/core # commit changes
 ng add @nguniversal/express-engine
 
+# development workflows
 npm run api
 npm run dev:ssr
 
+# deployment workflows
 npm run build:ssr
 npm run serve:ssr
 
+# static prerender each discovered page
 npm run prerender
 
 ##  @Inject(PLATFORM_ID) private readonly platformId: Object, on Logger
 
+## a server-browser cache using transitions
 ng g s core/abstract
 ng g s core/client
 ng g s core/server

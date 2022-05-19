@@ -1,6 +1,7 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, PLATFORM_ID } from '@angular/core';
+import { TransferState } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { CacheInterceptor } from '@stk/services/cache.interceptor';
 import { ErrorInterceptor } from '@stk/services/error.interceptor';
@@ -10,7 +11,20 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { InfoAuxComponent } from './components/info-aux/info-aux.component';
 import { LoggerService } from './logger.service';
+import { StateAbstractService } from './state_abstract.service';
+import { StateBrowserService } from './state_browser.service';
+import { StateServerService } from './state_server.service';
 import { APP_VERSION, ONLY_ERRORS } from './tokens';
+
+function createAbstractService(
+  platformId: Object,
+  transferState: TransferState,
+  loggerService: LoggerService
+) {
+  return isPlatformBrowser(platformId)
+    ? new StateBrowserService(transferState, loggerService)
+    : new StateServerService(transferState, loggerService);
+}
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, InfoAuxComponent],
@@ -22,6 +36,11 @@ import { APP_VERSION, ONLY_ERRORS } from './tokens';
     { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: StatusInterceptor, multi: true },
+    {
+      provide: StateAbstractService,
+      useFactory: createAbstractService,
+      deps: [PLATFORM_ID, TransferState, LoggerService],
+    },
   ],
 })
 export class CoreModule {

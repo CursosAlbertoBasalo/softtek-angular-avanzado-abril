@@ -260,8 +260,15 @@ ng g s core/abstract
 ng g s core/client
 ng g s core/server
 
-```
 
-```
+################################################################################
+# 8️⃣ - PWA
+################################################################################
 
+ng update
+ng update @angular/cli
+npm i --force # commit changes
+ng update @angular/core
+npm i --force # commit changes
+ng add @angular/pwa
 ```

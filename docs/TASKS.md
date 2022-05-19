@@ -67,3 +67,9 @@
 - [x] Use a different strategy abstract service on client or server
 - [x] Transfer state
 - [x] SEO friendly (home page)
+
+## 8. PWA
+
+- [x] Install and configure
+- [x] Cache
+- [ ] Updates

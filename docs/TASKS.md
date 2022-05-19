@@ -58,3 +58,12 @@
 
 - [x] Un Store reactivo para comunicar datos entre elementos desacoplados
 - [x] Uso para el estado de las llamadas HTTP
+
+## 7. SSR
+
+- [x] Add Server-side capabilities
+- [x] Run the app at the server
+- [x] Use a different log logic on the browser or server
+- [x] Use a different strategy abstract service on client or server
+- [x] Transfer state
+- [x] SEO friendly (home page)

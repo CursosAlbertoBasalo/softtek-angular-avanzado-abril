@@ -11,11 +11,11 @@ export class StateBrowserService extends StateAbstractService {
     super(transferState, logger);
   }
   public doThings() {
-    console.log('🧔 doing things on the CLIENT side');
+    console.log('🧔 doing things on the BROWSER side');
   }
 
   public setTransferState(urlKey: string, state: unknown): void {
-    this.logger.log('🕳️ SetTransfer do nothing on client side', null);
+    this.logger.log('🕳️ SetTransfer do nothing on browser side', null);
   }
 
   public getTransferState(urlKey: string): unknown {

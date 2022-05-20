@@ -255,13 +255,12 @@ npm run prerender
 
 ##  @Inject(PLATFORM_ID) private readonly platformId: Object, on Logger
 
+# add transfer state
+# BrowserTransferStateModule ServerTransferStateModule
+
 ## a server-browser cache using transitions
-ng g s core/abstract
-ng g s core/client
-ng g s core/server
-
-```
-
-```
+ng g s core/api/services/state_abstract
+ng g s core/api/services/state_browser
+ng g s core/api/services/state_server
 
 ```

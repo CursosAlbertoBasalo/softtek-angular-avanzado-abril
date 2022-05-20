@@ -26,7 +26,7 @@ export class LoggerService {
     console.log(logMessage, payload);
   }
   warn(message: string, payload: unknown) {
-    if (this.isServer()) return;
+    // if (this.isServer()) return;
     if (this.onlyErrors) return;
     const logMessage = `🚧 ${this.appVersion} - ${message}`;
     console.warn(logMessage, payload);

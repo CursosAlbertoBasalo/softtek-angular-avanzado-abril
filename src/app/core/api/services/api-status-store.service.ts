@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Status } from '@stk/models/status.enum';
 import { AtomicStore } from '../../atomic.store';
+import { LoggerService } from '../../logger.service';
 
 export type HttpStatus = { status: Status; urlRequest: string };
 
@@ -8,8 +9,8 @@ export type HttpStatus = { status: Status; urlRequest: string };
   providedIn: 'root',
 })
 export class ApiStatusStoreService extends AtomicStore<HttpStatus> {
-  constructor() {
+  constructor(logger: LoggerService) {
     super({ status: Status.Idle, urlRequest: '' });
-    super.getChanges$().subscribe((change) => console.table(change));
+    super.getChanges$().subscribe((change) => logger.log('🛂 ApiStatusStoreService', change));
   }
 }

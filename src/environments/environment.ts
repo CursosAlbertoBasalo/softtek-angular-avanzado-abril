@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:3000',
   units: 'metric',
-  onlyErrors: true,
+  onlyErrors: false,
 };
 
 /*

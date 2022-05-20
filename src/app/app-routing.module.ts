@@ -17,15 +17,21 @@ const routes: Routes = [
     outlet: 'infoAux',
     component: InfoAuxComponent,
   },
-  { path: 'register', loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) },
-  { path: 'labs', loadChildren: () => import('./labs/labs.module').then(m => m.LabsModule) },
-  { path: 'trips', loadChildren: () => import('./trips/trips.module').then(m => m.TripsModule) },
+  {
+    path: 'register',
+    loadChildren: () => import('./auth/register/register.module').then((m) => m.RegisterModule),
+  },
+  { path: 'labs', loadChildren: () => import('./labs/labs.module').then((m) => m.LabsModule) },
+  { path: 'trips', loadChildren: () => import('./trips/trips.module').then((m) => m.TripsModule) },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})],
+  imports: [
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabledBlocking',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

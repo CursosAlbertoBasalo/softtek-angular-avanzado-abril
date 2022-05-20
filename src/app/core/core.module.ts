@@ -5,18 +5,18 @@ import { TransferState } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { CacheInterceptor } from '@stk/services/cache.interceptor';
 import { ErrorInterceptor } from '@stk/services/error.interceptor';
+import { StateBrowserService } from '@stk/services/state_browser.service';
+import { StateServerService } from '@stk/services/state_server.service';
 import { StatusInterceptor } from '@stk/services/status.interceptor';
 import { environment } from 'src/environments/environment';
+import { StateAbstractService } from './api/services/state_abstract.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { InfoAuxComponent } from './components/info-aux/info-aux.component';
 import { LoggerService } from './logger.service';
-import { StateAbstractService } from './state_abstract.service';
-import { StateBrowserService } from './state_browser.service';
-import { StateServerService } from './state_server.service';
 import { APP_VERSION, ONLY_ERRORS } from './tokens';
 
-function createAbstractService(
+function createStateService(
   platformId: Object,
   transferState: TransferState,
   loggerService: LoggerService
@@ -33,14 +33,14 @@ function createAbstractService(
   providers: [
     { provide: APP_VERSION, useValue: '1.0.0' },
     { provide: ONLY_ERRORS, useValue: environment.onlyErrors },
+    {
+      provide: StateAbstractService,
+      useFactory: createStateService,
+      deps: [PLATFORM_ID, TransferState, LoggerService],
+    },
     { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: StatusInterceptor, multi: true },
-    {
-      provide: StateAbstractService,
-      useFactory: createAbstractService,
-      deps: [PLATFORM_ID, TransferState, LoggerService],
-    },
   ],
 })
 export class CoreModule {

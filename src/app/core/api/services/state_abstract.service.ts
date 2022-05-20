@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TransferState } from '@angular/platform-browser';
-import { LoggerService } from './logger.service';
+import { LoggerService } from '../../logger.service';
 
 @Injectable({
   providedIn: 'root',

@@ -29,11 +29,13 @@ export class PwaService {
     @Inject(PLATFORM_ID) private readonly platformId: Object
   ) {
     if (isPlatformServer(this.platformId)) return;
-
+    this.pwaStore.set({
+      status: `🏁 Starting`,
+    });
     this.loadInitialVersion();
 
+    this.observeVersionUpdates();
     this.checkForUpdatesOnTime();
-    this.checkForUpdateNotControlled();
   }
 
   private loadInitialVersion() {
@@ -55,9 +57,9 @@ export class PwaService {
     localStorage.setItem(this.storageKey, JSON.stringify(this.appVersion));
   }
 
-  private checkForUpdateNotControlled() {
+  private observeVersionUpdates() {
     this.pwaStore.set({
-      status: `👀 Observing updates`,
+      status: `👀 Observing version updates`,
     });
     this.swUpdate.versionUpdates.subscribe((event) => {
       this.onUpdate(event);
@@ -90,7 +92,7 @@ export class PwaService {
 
   private checkForUpdatesOnTime() {
     this.pwaStore.set({
-      status: `✏️ Register for updates`,
+      status: `✏️ Registering to check for updates`,
     });
 
     const appIsStable$ = this.appRef.isStable.pipe(first((isStable) => isStable === true));
@@ -106,7 +108,10 @@ export class PwaService {
       this.swUpdate.checkForUpdate().then((hasNewVersion) => {
         if (hasNewVersion) {
           this.pwaStore.set({
+            version: this.appVersion.version,
+            description: this.appVersion.description,
             status: `🪙 Found Updates`,
+            showReload: true,
           });
         } else {
           this.pwaStore.set({

@@ -31,7 +31,7 @@ function createStateService(
   imports: [CommonModule, HttpClientModule, RouterModule],
   exports: [HeaderComponent, FooterComponent, InfoAuxComponent],
   providers: [
-    { provide: APP_VERSION, useValue: '1.0.0' },
+    { provide: APP_VERSION, useValue: '1.1.0' },
     { provide: ONLY_ERRORS, useValue: environment.onlyErrors },
     {
       provide: StateAbstractService,

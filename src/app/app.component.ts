@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PwaService } from './core/pwa.service';
 
 @Component({
   selector: 'stk-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'softtek-angular-avanzado-abril';
+  constructor(pwaService: PwaService) {}
 }

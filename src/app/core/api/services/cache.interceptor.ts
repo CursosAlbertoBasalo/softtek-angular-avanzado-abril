@@ -16,6 +16,9 @@ import { StateAbstractService } from './state_abstract.service';
 export class CacheInterceptor implements HttpInterceptor {
   private readonly cache = new Map<string, unknown>();
   private urlRequest = '';
+
+  // ToDo: Being now a PWA dont need to use cache on browser
+
   constructor(private abstract: StateAbstractService, private readonly logger: LoggerService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {

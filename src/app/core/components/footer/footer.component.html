@@ -1,5 +1,10 @@
 <hr>
 <footer>
+  <section *ngIf="pwa$ | async  as pwa">
+    <pre>{{ pwa | json }}</pre>
+    <button *ngIf="pwa.showReload"
+            (click)="reloadApp()">♻️ Reload to update app</button>
+  </section>
   <section>
     <a href="https://github.com/LabsAdemy/softtek-angular-avanzado"
        target="_blank"><strong>Code</strong></a>

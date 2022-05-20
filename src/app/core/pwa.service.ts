@@ -2,6 +2,12 @@ import { isPlatformServer } from '@angular/common';
 import { ApplicationRef, Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { concat, first, interval } from 'rxjs';
+import { PwaStore } from './pwa.store';
+
+type AppVersion = {
+  version: string;
+  description: string;
+};
 
 @Injectable({
   providedIn: 'root',
